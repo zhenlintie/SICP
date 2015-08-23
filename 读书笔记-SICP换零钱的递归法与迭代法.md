@@ -405,4 +405,4 @@ printf("递归法count: %d",getCountChange2(500));
 学习的过程比较漫长，情绪也是跌宕起伏，但我相信结果是美好的，继续往下学吧😄...
 
 
-文章在[Github](https://github.com/zhenlintie/SICP/blob/master/%E6%8D%A2%E9%9B%B6%E9%92%B1/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0-SICP%E6%8D%A2%E9%9B%B6%E9%92%B1%E7%9A%84%E9%80%92%E5%BD%92%E6%B3%95%E4%B8%8E%E8%BF%AD%E4%BB%A3%E6%B3%95.md)上同步跟更新
+文章在[Github](https://github.com/zhenlintie/SICP/blob/master/读书笔记-SICP换零钱的递归法与迭代法.md)上同步跟更新
