@@ -270,7 +270,7 @@ printf("递归法count: %d",getCountChange2(500));
 ->] 迭代法count: 59576
 
 ->] 递归法执行了12822611次
-->] 递归法count: 2435
+->] 递归法count: 59576
 
 ```
 
