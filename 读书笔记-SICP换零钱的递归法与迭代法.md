@@ -29,19 +29,19 @@
 ```
 (define (first-denomination kinds-of-coin)
   (cond ((= kinds-of-coin 1) 1)
-	((= kinds-of-coin 2) 5)
-	((= kinds-of-coin 3) 10)
-	((= kinds-of-coin 4) 25)
-	((= kinds-of-coin 5) 50)))
+	    ((= kinds-of-coin 2) 5)
+	    ((= kinds-of-coin 3) 10)
+	    ((= kinds-of-coin 4) 25)
+	    ((= kinds-of-coin 5) 50)))
 
 (define (cc amount kinds-of-coin)
   (cond ((= amount 0) 1)
-	((or (< amount 0) (= kinds-of-coin 0)) 0)
-	(else (+ (cc amount
-		     (- kinds-of-coin 1))
-		 (cc (- amount
-			(first-denomination kinds-of-coin))
-		     kinds-of-coin)))))
+	    ((or (< amount 0) (= kinds-of-coin 0)) 0)
+	    (else (+ (cc amount
+		             (- kinds-of-coin 1))
+		         (cc (- amount
+			            (first-denomination kinds-of-coin))
+		             kinds-of-coin)))))
 
 (define (count-change amount)
   (cc amount 5))
@@ -282,101 +282,101 @@ printf("递归法count: %d",getCountChange2(500));
 ```
 (define (get-coin index)
   (cond ((= index 1) 50)
-	((= index 2) 25)
-	((= index 3) 10)
-	((= index 4) 5)
-	((= index 5) 1)))
+        ((= index 2) 25)
+        ((= index 3) 10)
+        ((= index 4) 5)
+        ((= index 5) 1)))
 
 (define (c-c leftAmount count cursor c1 c2 c3 c4 c5)
   (cond ((or (= leftAmount 0) (< leftAmount 0)) ; 当剩余的钱小于或等于0的时候
-	 (cond ((or (= cursor 4)
-		    (and (= cursor 5) (> c4 0))) ;如果cursor=4，或者 cursor=5且c4>0
-		(c-c (- (+ leftAmount
-			   (get-coin 4))
-			(get-coin 5)) ;leftAmount将第4种硬币钱数加回来一个，且c4减1，紧接着加上第5种硬币钱数，且c5加1
-		     (if (< leftAmount 0)
-			 count
-			 (+ count 1)) ;如果leftAmount=0，说明正好分完一次，所以count加1；反之，count不变
-		     5 ;将游标指向第五种硬币
-		     c1
-		     c2
-		     c3
-		     (- c4 1) ;c4减1
-		     (+ c5 1))) ;c5加1，不清零是因为c5是最后一种硬币，无需从零开始计算
-	       ((or (= cursor 3)
-		    (and (= cursor 5) (= c4 0) (> c3 0)))
-		(c-c (- (+ leftAmount
-			   (get-coin 3)
-			   (* c5 (get-coin 5)));此时c5需要清零，所以把第五种硬币的钱数都加回来
-			(get-coin 4))
-		     (if (< leftAmount 0)
-			 count
-			 (+ count 1))
-		     4
-		     c1
-		     c2
-		     (- c3 1)
-		     (+ c4 1)
-		     0))
-	       ((or (= cursor 2)
-		    (and (= cursor 5) (= c4 0) (= c3 0) (> c2 0)))
-		(c-c (- (+ leftAmount
-			   (get-coin 2)
-			   (* c4 (get-coin 4))
-			   (* c5 (get-coin 5)))
-			(get-coin 3))
-		     (if (< leftAmount 0)
-			 count
-			 (+ count 1))
-		     3
-		     c1
-		     (- c2 1)
-		     (+ c3 1)
-		     0 ;清零原理同上
-		     0))
-	       ((or (= cursor 1)
-		    (and (= cursor 5) (= c4 0) (= c3 0) (= c2 0) (> c1 0)))
-		(c-c (- (+ leftAmount
-			   (get-coin 1)
-			   (* c3 (get-coin 3))
-			   (* c4 (get-coin 4))
-			   (* c5 (get-coin 5)))
-			(get-coin 2))
-		     (if (< leftAmount 0)
-			 count
-			 (+ count 1))
-		     2
-		     (- c1 1)
-		     (+ c2 1)
-		     0
-		     0
-		     0))
-	       (else (if (< leftAmount 0); 此时c4=0,c3=0,c2=0,c1=0,所以全部遍历完毕，结束。
-			 count
-			 (+ count 1)))))
-	(else (c-c (- leftAmount
-		       (get-coin cursor));此时如果leftAmount>0,继续将游标指向的硬币数量加1
-		    count
-		    cursor
-		    (if (= cursor 1)
-		        (+ c1 1)
-		        c1)
-		    (if (= cursor 2)
-		        (+ c2 1)
-		        c2)
-		    (if (= cursor 3)
-		        (+ c3 1)
-		        c3)
-		    (if (= cursor 4)
-		        (+ c4 1)
-			c4)
-		    (if (= cursor 5)
-			(+ c5 1)
-		        c5)))))
+         (cond ((or (= cursor 4)
+                    (and (= cursor 5) (> c4 0))) ;如果cursor=4，或者 cursor=5且c4>0
+                (c-c (- (+ leftAmount
+                           (get-coin 4))
+                        (get-coin 5)) ;leftAmount将第4种硬币钱数加回来一个，且c4减1，紧接着加上第5种硬币钱数，且c5加1
+                     (if (< leftAmount 0)
+                         count
+                         (+ count 1)) ;如果leftAmount=0，说明正好分完一次，所以count加1；反之，count不变
+                     5 ;将游标指向第五种硬币
+                     c1
+                     c2
+                     c3
+                     (- c4 1) ;c4减1
+                     (+ c5 1))) ;c5加1，不清零是因为c5是最后一种硬币，无需从零开始计算
+                ((or (= cursor 3)
+                     (and (= cursor 5) (= c4 0) (> c3 0)))
+                 (c-c (- (+ leftAmount
+                            (get-coin 3)
+                            (* c5 (get-coin 5)));此时c5需要清零，所以把第五种硬币的钱数都加回来
+                          (get-coin 4))
+                      (if (< leftAmount 0)
+                          count
+                          (+ count 1))
+                      4
+                      c1
+                      c2
+                      (- c3 1)
+                      (+ c4 1)
+                      0))
+               ((or (= cursor 2)
+                    (and (= cursor 5) (= c4 0) (= c3 0) (> c2 0)))
+                (c-c (- (+ leftAmount
+                           (get-coin 2)
+                           (* c4 (get-coin 4))
+                           (* c5 (get-coin 5)))
+                        (get-coin 3))
+                     (if (< leftAmount 0)
+                         count
+                         (+ count 1))
+                     3
+                     c1
+                     (- c2 1)
+                     (+ c3 1)
+                     0 ;清零原理同上
+                     0))
+               ((or (= cursor 1)
+                    (and (= cursor 5) (= c4 0) (= c3 0) (= c2 0) (> c1 0)))
+                (c-c (- (+ leftAmount
+                           (get-coin 1)
+                           (* c3 (get-coin 3))
+                           (* c4 (get-coin 4))
+                           (* c5 (get-coin 5)))
+                        (get-coin 2))
+                     (if (< leftAmount 0)
+                         count
+                         (+ count 1))
+                     2
+                     (- c1 1)
+                     (+ c2 1)
+                     0
+                     0
+                     0))
+               (else (if (< leftAmount 0); 此时c4=0,c3=0,c2=0,c1=0,所以全部遍历完毕，结束。
+                         count
+                         (+ count 1)))))
+         (else (c-c (- leftAmount
+                       (get-coin cursor));此时如果leftAmount>0,继续将游标指向的硬币数量加1
+                    count
+                    cursor
+                    (if (= cursor 1)
+                        (+ c1 1)
+                        c1)
+                    (if (= cursor 2)
+                        (+ c2 1)
+                        c2)
+                    (if (= cursor 3)
+                        (+ c3 1)
+                        c3)
+                    (if (= cursor 4)
+                        (+ c4 1)
+                        c4)
+                    (if (= cursor 5)
+                        (+ c5 1)
+                        c5)))))
 
 (define (count-change2 amount)
   (c-c (- amount
-	  (get-coin 1))
+          (get-coin 1))
        0
        1
        1
@@ -384,6 +384,7 @@ printf("递归法count: %d",getCountChange2(500));
        0
        0
        0))
+
 ```
 
 进行测试
@@ -401,7 +402,7 @@ printf("递归法count: %d",getCountChange2(500));
 
 虽然最后代码看起来很长，但思路还算清晰，由于因为挑战成功吧，还是有点小高兴的，也算是给了自己一个比较满意的答案。
 
-仔细研究研究这个算法，还是有优化的余地的，比如当游标处的币种数量减1时，下一币种数量不是加1，而是直接加上此游标处币种除以下一币种的倍数（需要四舍五入），这样可以减少迭代次数。
+仔细研究研究这个算法，还是有优化的余地的，比如当游标处的币种数量减1时，下一币种数量不是加1，而是直接加上，此游标处币种的币值与需要清零的所有币值的和，然后再除以下一币种的币值最后得到的商，这样可以减少迭代次数。
 学习的过程比较漫长，情绪也是跌宕起伏，但我相信结果是美好的，继续往下学吧😄...
 
 
